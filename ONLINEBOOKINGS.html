@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="CSS/externalstylesheet/onlinebooking.css">
+    <script type="text/javascript" src="JSS/RGraph.common.core.js"></script>
+    <script type="text/javascript" src="JSS/RGraph.bar.js"></script>
+    <script type="text/javascript">
+        var date = new Date();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        var year = date.getFullYear();
+        var output = month + '/' + day + '/' + year;
+        function comparedate() {
+            if (Date.parse(document.form1.bookingdate.value) < Date.parse(output)) {
+                alert("you cannot select a date less than the current date");
+            }
+        }
+        function checknum() {
+            x = event.charcode;
+            if ((x >= 65 && x <= 90) || (x >= 97 && x <= 122)) {
+                alert("enter numeric value");
+                document.form1.num.value = '';
+
+            }
+        }
+        function calcTotal() {
+            if (document.form1.num.value > 20) {
+                alert("you cannot book more then 20 tickets at a time");
+                document.form1.num.value = '';
+            }
+            else
+                document.form1.total.value = (document.form1.price.value) * (document.form1.num.value);
+        }
+        function check() {
+            for (i = 0; i <= document.form1.RB.length; i++) {
+                if (document.form1.RB[0].checked == true) {
+                    document.form1.price.value = 100;
+                } else if (document.form1.RB[1].checked == true) {
+                    document.form1.price.value = 140;
+                } else if (document.form1.RB[2].checked == true) {
+                    document.form1.price.value = 200;
+                }
+            }
+        }
+        function sub() {
+            if ((document.form1.usrname.value != '') && (document.form1.num.value != '') && (Date.parse(document.form1.bookingdate.value) > Date.parse(output)) && (Document.form1.sel.value !== 0) && (document.form1.timming.value !== 7)) {
+                alert("your tickets have been booked.");
+            }
+        }
+        function validate() {
+            if ((document.form1.sel.value == 0) || (document.form1.timming.value == 7) || (Date.parse(document.form1.bookingdate.value) < Date.parse(output))) {
+                alert("please select the date,movie name,and movie timming.");
+                return false
+            }
+            else
+                return true
+        }
+
+    </script>
+
+</head>
+
+<body>
+    
+     
+    <div id="MainDivContent" style="width: 1100px; height: auto; border: 2px; margin-left:250px ;padding: 20px;  ">
+   
+    
+        <DIV id="header" style="height:100px;width: 1100px; height: 150px; border: 2px;">
+            <img id="logo" src="images/logo.png" width="500" height="100">
+            
+            <h5 style="float: right; margin-right:10px;">for enquiry <br>
+                call us 922564854
+            </h5>    
+            <img style="width: 50px;float: right; margin-right:4px ;" id="callus " src="images/callus.png">
+           <div> <h4><span class="auto-style" style="float: left;"><b>the ultimate way for booking movie tickets</b></span></h4></div>
+        </DIV>
+            
+       
+  
+        <div id="topnav" style="width: 1040px; height: 25px; border: 2px solid black; padding-left: 60px; margin-top: 8px; background-color: black; word-spacing: 5px;">
+            <nav>
+                <a href="homepage.html">home</a>
+                <a href="aboutus.html">about us</a>
+                <a href="contactus.html">contact us</a>
+                <a href="upcomingmovie.html">upcoming movies</a>
+                <a href="ONLINEBOOKINGS.html">Online Booking</a>
+                <a href="shownwheelmainframe].html">Gallery</a>
+                <a href="offers.html">Bank Offer</a>
+                <a href="showonwheels login.html">login and Register</a>
+            </nav>
+        </div>
+      
+  
+   
+    <div id="maindiv"  style="background-color: aliceblue; padding: 20px; ">
+
+
+        <form name="form1" onsubmit="return validate();">
+            <table>
+                <tr>
+                    <th colspan="5">book your tickets online</th>
+                </tr>
+                <tr>
+                    <td>name</td>
+                    <td><input type="text" name="usrname" placeholder="enter your name" required></td>
+                </tr>
+                <tr>
+                    <td>date of booking</td>
+                    <td><input type="date" id="bookingdate" name="bookingdate" onchange="comparedate();" required></td>
+                </tr>
+                <tr>
+                    <td>movie</td>
+                    <td><select id="sel">
+                            <option value="0">select movie</option>
+                            <optgroup label="drama">
+                                <option value="1">nightmare</option>
+                                <option value="2">along polly came</option>
+                            </optgroup>
+                            <optgroup label="thriller">
+                                <option value="3">source code</option>
+                                <option value="4">if only</option>
+                            </optgroup>
+                            <optgroup label="romantic">
+                                <option value="5">a walk to remember</option>
+                                <option value="6">angel</option>
+                            </optgroup>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>show timming</td>
+                    <td><select id="timing">
+                            <option value="7">select time</option>
+                            <option value="8">10:30am</option>
+                            <option value="9">5:30pm</option>
+                            <option value="10">12:30pm</option>
+                </tr>
+                <tr>
+                    <td>select class </td>
+                    <td>
+                        <input type="radio" name="RB" onclick="check();" required>platinum</input>
+                        <input type="radio" name="RB" onclick="check();" required>gold</input>
+                        <input type="radio" name="RB" onclick="check();" required>exclusive</input>
+                    </td>
+                </tr>
+                <tr>
+                    <td>price</td>
+                    <td><input type="text" name="price" value="price" disabled></td>
+                </tr>
+                <tr>
+                    <td>number of tickets</td>
+                    <td>
+                        <input type="text" name="num" placeholder="enter tickets" onchange="calcTotal();"
+                            onkeypress="checknum();">
+                    </td>
+                </tr>
+                <tr>
+                    <td>total price</td>
+                    <td><input type="text" name="total" disabled></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="submit" type="submit" onclick="sub();">
+                    </td>
+                    <td>
+                        <input type="reset">
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <br>
+        <h2>alerts & updates</h2>
+        <p>new payment option has been introduced for tickets booking.</p>
+        <div class="auto-style">
+
+            <p>mobile booking is now resumed w.e.f.05-april-2012.</p>
+            <p>id proof is required for getting student concession on tickets.</p>
+            <p>tickets booking on mobile:now book your movie ticket-ANYWHERE ANYTIME though your mobile phones.</p>
+            <p>you are advised not to carrry inflamble/dangerous/explosive article as part of their luggage and
+                also to desist from smoking in the movie halls. </p>
+            <p> please update your mobile number in our prfofle to recive SMS alerts for your ticket booking.</p>.
+            <p>never purchase e-tickets from unauthorised agents or persons</p>
+            <p>no refund will be granted on cancellation of tickets.</p>
+
+
+        </div>
+        <br><br><br>
+        <p>no refund will be granted on cancellation of tickets.</p>
+        <br><br><br><br>
+        <h1>Movies Ratings </h1>
+        <canvas width="1050" height="400" id="test" style="border: 2px solid black;"></canvas>
+        <script type="text/javascript" charset="UTF-8">
+            var bar = new RGraph.Bar('test', [4, 2.5, 2.5, 3, 4, 3.5]);
+            bar.Set('chart.colors', ['green']);
+            bar.Set('chart.labels', ["source code ", "if only", "Angel", "Nightmare", "Along polly came ", "A walk to Remember"]);
+            bar.Draw();
+
+        </script>
+
+    </div>
+
+</body>
+
+</html>
